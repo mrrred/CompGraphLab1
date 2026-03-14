@@ -7,7 +7,6 @@
 #include <GL/glut.h>
 
 int index = 0;
-// Forward declarations so the vector can reference the functions below
 void  displaySolidSphere(void);
 void  displayWireSphere(void);
 void  displaySolidCube(void);
