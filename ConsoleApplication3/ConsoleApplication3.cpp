@@ -48,9 +48,41 @@ std::vector<void(*)(void)> displayVector = {
 	displayWireTeapot
 };
 
+int g_winW = 400;
+int g_winH = 400;
 
 void resize(int width, int height)
 {
+	if (width <= 0 || height <= 0) return;
+
+	g_winW = width;
+	g_winH = height;
+
+	glViewport(0, 0, g_winW, g_winH);
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+
+	float aspect = (float)g_winW / (float)g_winH;
+
+	if (aspect >= 1.0f)
+	{
+		glOrtho(-5.0 * aspect, 5.0 * aspect, -5.0, 5.0, 2.0, 12.0);
+	}
+	else
+	{
+		glOrtho(-5.0, 5.0, -5.0 / aspect, 5.0 / aspect, 2.0, 12.0);
+	}
+
+	// Чтобы не сохранять пропорции
+	//glOrtho(-5.0, 5.0, -5.0, 5.0, 2.0, 12.0);
+
+	glMatrixMode(GL_MODELVIEW);
+
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glutDisplayFunc(displayVector[index]);
+
+	glutPostRedisplay();
 }
 
 /*
@@ -80,6 +112,7 @@ void glutSolidTeapot(GLdouble size);
 
 void  displaySolidSphere(void)
 {
+	glViewport(0, 0, g_winW, g_winH);
 	glColor3d(1.0, 1.0, 0.0);
 	glutSolidSphere(1.0, 24, 24);
 	glFlush();
@@ -87,6 +120,7 @@ void  displaySolidSphere(void)
 
 void  displayWireSphere(void)
 {
+	glViewport(0, 0, g_winW, g_winH);
 	glColor3d(1.0, 1.0, 0.0);
 	glutWireSphere(1.0, 16, 16);
 	glFlush();
@@ -94,6 +128,7 @@ void  displayWireSphere(void)
 
 void  displaySolidCube(void)
 {
+	glViewport(0, 0, g_winW, g_winH);
 	glColor3d(1.0, 1.0, 0.0);
 	glutSolidCube(1.2);
 	glFlush();
@@ -101,6 +136,7 @@ void  displaySolidCube(void)
 
 void  displayWireCube(void)
 {
+	glViewport(0, 0, g_winW, g_winH);
 	glColor3d(1.0, 1.0, 0.0);
 	glutWireCube(1.2);
 	glFlush();
@@ -108,6 +144,7 @@ void  displayWireCube(void)
 
 void  displaySolidTorus(void)
 {
+	glViewport(0, 0, g_winW, g_winH);
 	glColor3d(1.0, 1.0, 0.0);
 	glutSolidTorus(0.4, 0.9, 24, 24);
 	glFlush();
@@ -115,6 +152,7 @@ void  displaySolidTorus(void)
 
 void  displayWireTorus(void)
 {
+	glViewport(0, 0, g_winW, g_winH);
 	glColor3d(1.0, 1.0, 0.0);
 	glutWireTorus(0.4, 0.9, 18, 18);
 	glFlush();
@@ -122,6 +160,7 @@ void  displayWireTorus(void)
 
 void  displaySolidIcosahedron(void)
 {
+	glViewport(0, 0, g_winW, g_winH);
 	glColor3d(1.0, 1.0, 0.0);
 	glutSolidIcosahedron();
 	glFlush();
@@ -129,6 +168,7 @@ void  displaySolidIcosahedron(void)
 
 void  displayWireIcosahedron(void)
 {
+	glViewport(0, 0, g_winW, g_winH);
 	glColor3d(1.0, 1.0, 0.0);
 	glutWireIcosahedron();
 	glFlush();
@@ -136,6 +176,7 @@ void  displayWireIcosahedron(void)
 
 void  displaySolidOctahedron(void)
 {
+	glViewport(0, 0, g_winW, g_winH);
 	glColor3d(1.0, 1.0, 0.0);
 	glutSolidOctahedron();
 	glFlush();
@@ -143,6 +184,7 @@ void  displaySolidOctahedron(void)
 
 void  displayWireOctahedron(void)
 {
+	glViewport(0, 0, g_winW, g_winH);
 	glColor3d(1.0, 1.0, 0.0);
 	glutWireOctahedron();
 	glFlush();
@@ -150,6 +192,7 @@ void  displayWireOctahedron(void)
 
 void  displaySolidTetrahedron(void)
 {
+	glViewport(0, 0, g_winW, g_winH);
 	glColor3d(1.0, 1.0, 0.0);
 	glutSolidTetrahedron();
 	glFlush();
@@ -157,6 +200,7 @@ void  displaySolidTetrahedron(void)
 
 void  displayWireTetrahedron(void)
 {
+	glViewport(0, 0, g_winW, g_winH);
 	glColor3d(1.0, 1.0, 0.0);
 	glutWireTetrahedron();
 	glFlush();
@@ -164,6 +208,7 @@ void  displayWireTetrahedron(void)
 
 void  displaySolidDodecahedron(void)
 {
+	glViewport(0, 0, g_winW, g_winH);
 	glColor3d(1.0, 1.0, 0.0);
 	glutSolidDodecahedron();
 	glFlush();
@@ -171,6 +216,7 @@ void  displaySolidDodecahedron(void)
 
 void  displayWireDodecahedron(void)
 {
+	glViewport(0, 0, g_winW, g_winH);
 	glColor3d(1.0, 1.0, 0.0);
 	glutWireDodecahedron();
 	glFlush();
@@ -178,6 +224,7 @@ void  displayWireDodecahedron(void)
 
 void  displaySolidCone(void)
 {
+	glViewport(0, 0, g_winW, g_winH);
 	glColor3d(1.0, 1.0, 0.0);
 	glutSolidCone(0.8, 1.2, 24, 24);
 	glFlush();
@@ -185,6 +232,7 @@ void  displaySolidCone(void)
 
 void  displayWireCone(void)
 {
+	glViewport(0, 0, g_winW, g_winH);
 	glColor3d(1.0, 1.0, 0.0);
 	glutWireCone(0.8, 1.2, 16, 16);
 	glFlush();
@@ -192,6 +240,7 @@ void  displayWireCone(void)
 
 void  displaySolidTeapot(void)
 {
+	glViewport(0, 0, g_winW, g_winH);
 	glColor3d(1.0, 1.0, 0.0);
 	glutSolidTeapot(1.0);
 	glFlush();
@@ -200,6 +249,7 @@ void  displaySolidTeapot(void)
 
 void  displayWireTeapot(void)
 {
+	glViewport(0, 0, g_winW, g_winH);
 	glColor3d(1.0, 1.0, 0.0);
 	glutWireTeapot(1.0);
 	glFlush();
@@ -244,7 +294,7 @@ int main(int argc, char** argv)
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowPosition(50, 10);
-	glutInitWindowSize(400, 400);
+	glutInitWindowSize(g_winW, g_winH);
 	glutCreateWindow("Hello");
 	glutReshapeFunc(resize);
 	init();
